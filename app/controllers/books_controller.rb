@@ -5,6 +5,8 @@ before_action :ensure_user,only: [:edit,:update,:destroy]
     @book = Book.find(params[:id])
     @user = @book.user
     @books = Book.new
+    @post_comments = PostComment.all
+    @post_comment = PostComment.new
   end
 
   def index
