@@ -1,0 +1,3 @@
+  <% if user_signed_in? && post_comment.user_id == current_user.id %>
+    <%= link_to "destroy",book_post_comments_path(post_comment.id), remote: true, method: :delete, "data-confirm"=>"本当に削除しますか？"%>
+  <%end%>

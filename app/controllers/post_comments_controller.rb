@@ -5,7 +5,7 @@ class PostCommentsController < ApplicationController
     comment = current_user.post_comments.new(post_comment_params)
     comment.book_id = book.id
     comment.save
-    redirect_to book_path(book.id)
+    @post_comments = PostComment.all
   end
   
   def destroy
@@ -14,8 +14,6 @@ class PostCommentsController < ApplicationController
       render :show
     end
     comment.destroy
-    redirect_to  request.referer
-    
   end
 
 private
