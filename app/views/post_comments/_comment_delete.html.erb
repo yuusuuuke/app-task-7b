@@ -1,0 +1,17 @@
+ 
+ 
+<table>
+        
+          <% book.post_comments.each do |post_comment| %>
+            <tr>
+            <td><%= image_tag post_comment.user.get_profile_image(100,100) %></td>
+            <td><%= post_comment.comment %></td>
+            <td>
+             <% if user_signed_in? && post_comment.user_id == current_user.id %>
+               <%= link_to "destroy",book_post_comment_path(book.id, post_comment.id), remote: true, method: :delete, "data-confirm"=>"本当に削除しますか？"%>
+             <%end%>
+            </td>
+            </tr>
+          <%end%>
+        
+      </table>

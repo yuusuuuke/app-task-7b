@@ -32,23 +32,11 @@
         </tbody>
       </table>
         <!--以下、コメント一覧-->
-      <table>
-        
-          <% @book.post_comments.each do |post_comment| %>
-            <tr>
-            <td><%= image_tag post_comment.user.get_profile_image(100,100) %></td>
-            <td><%= post_comment.comment %></td>
-              <!--コメント一覧機能部分テンプレート、非同期-->
-              <td class=<%= "comment_btn-" + post_comment.id.to_s %>>
-                <%= render "comments/comment_delete",  post_comment: post_comment %>
-              </td>
-            </tr>
-          <%end%>
-        
-      </table>
-      
+      <div class="comment_index-">
+        <%= render "post_comments/comment_delete",  book: @book %>
+      </div>
       <div class=<%="comment_btn-"%>>
-        <%= render "comments/post_comment", book: @book, post_comment: @post_comment %>
+        <%= render "post_comments/post_comment", book: @book, post_comment: @post_comment%>
       </div>
     </div>
   </div>
