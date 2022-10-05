@@ -27,13 +27,16 @@
           <td class= <%= "favorite_btn-" + @book.id.to_s %>>
             <%= render "favorites/favorite", book: @book %>
           </td>
-          <td><%= @book.post_comments.count %>コメント</td>
+          <!--コメント数の部分テンプレート（post_comments/post_comment_count）-->
+          <td id = "post_comments-count">
+            <%= render "post_comments/post_comment_count",  book: @book %>
+          </td>
         </tr>
         </tbody>
       </table>
         <!--以下、コメント一覧-->
       <div class="comment_index-">
-        <%= render "post_comments/comment_delete",  book: @book %>
+        <%= render "post_comments/comment_delete",book: @book %>
       </div>
       <div class=<%="comment_btn-"%>>
         <%= render "post_comments/post_comment", book: @book, post_comment: @post_comment%>
