@@ -12,10 +12,18 @@
       <tr>
         <td><%= link_to(book.user) do %>
           <%= image_tag book.user.get_profile_image(50,50) %>
-          <% end %>
+        <% end %>
         </td>
         <td><%= link_to book.title,book %></td>
         <td><%= book.body %></td>
+        <!--いいね機能部分テンプレート（_favorites）,非同期化-->
+        <td class=<%= "favorite_btn-" + book.id.to_s %>>
+          <%= render "favorites/favorite", book: book %>
+        </td>
+        <!--コメント数の部分テンプレート（post_comments/post_comment_count）-->
+        <td id = "post_comments-count">
+          <%= render "post_comments/post_comment_count", book: @book %>
+        </td>
       </tr>
     <% end %>
   </tbody>

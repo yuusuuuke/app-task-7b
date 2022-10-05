@@ -13,6 +13,8 @@ before_action :ensure_user,only: [:edit,:update,:destroy]
     # @books = Book.all
     @book = Book.new
     # いいね順に並べるための追記
+    to  = Time.current.at_end_of_day
+    from  = (to - 6.day).at_beginning_of_day
     @books = Book.includes(:favorited_users).sort {|a,b| b.favorited_users.size <=> a.favorited_users.size}
   end
 
