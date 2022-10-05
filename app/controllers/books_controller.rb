@@ -10,8 +10,10 @@ before_action :ensure_user,only: [:edit,:update,:destroy]
   end
 
   def index
-    @books = Book.all
+    # @books = Book.all
     @book = Book.new
+    # いいね順に並べるための追記
+    @books = Book.includes(:favorited_users).sort {|a,b| b.favorited_users.size <=> a.favorited_users.size}
   end
 
   def create

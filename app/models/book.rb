@@ -2,6 +2,9 @@ class Book < ApplicationRecord
  
   belongs_to :user
   has_many :favorites, dependent: :destroy
+  # いいね順に並べる機能実装のため追記
+  has_many :favorited_users, through: :favorites, source: :user
+  # ここまで
   has_many :post_comments, dependent: :destroy
   
   def favorited_by?(user)

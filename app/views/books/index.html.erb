@@ -30,6 +30,7 @@
             <td><%= link_to book.title,book %></td>
             <td><%= book.body %></td>
             <!--いいね機能部分テンプレート（_favorites）,非同期化-->
+            
               <td class=<%= "favorite_btn-" + book.id.to_s %>>
                 <%= render "favorites/favorite", book: book %>
               </td>
