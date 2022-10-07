@@ -7,6 +7,9 @@ before_action :ensure_user,only: [:edit,:update,:destroy]
     @books = Book.new
     @post_comments = PostComment.all
     @post_comment = PostComment.new
+    
+    # 観覧数カウント
+    impressionist(@book, nil, unique: [:ip_address]) # 追記
   end
 
   def index
@@ -16,6 +19,9 @@ before_action :ensure_user,only: [:edit,:update,:destroy]
     to  = Time.current.at_end_of_day
     from  = (to - 6.day).at_beginning_of_day
     @books = Book.includes(:favorited_users).sort {|a,b| b.favorited_users.size <=> a.favorited_users.size}
+    
+     #観覧数カウント 
+     @count_books = Book.order(impressions_count: 'DESC') # ソート機能を追加
   end
 
   def create

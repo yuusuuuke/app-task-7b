@@ -38,6 +38,13 @@
        <% end %>
       <% end %>
       </th>
+      <th>
+        <% if current_user != user && current_user.following?(user) && user.following?(current_user) %>
+          <%= link_to chat_path do %>
+            <button class = "btn btn-primary btn-sm">chatを始める</button>
+          <% end %>
+        <% end %>
+      </th>
    </tr>
 </table>
 　

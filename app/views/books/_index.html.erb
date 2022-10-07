@@ -24,6 +24,7 @@
         <td id = "post_comments-count">
           <%= render "post_comments/post_comment_count", book: @book %>
         </td>
+        <td>観覧数:<%= book.impressions_count %></td>
       </tr>
     <% end %>
   </tbody>
