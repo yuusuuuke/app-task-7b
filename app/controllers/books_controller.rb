@@ -8,17 +8,31 @@ before_action :ensure_user,only: [:edit,:update,:destroy]
     @post_comments = PostComment.all
     @post_comment = PostComment.new
     
-    # 観覧数カウント
+ # 観覧数カウント
     impressionist(@book, nil, unique: [:ip_address]) # 追記
   end
 
   def index
     # @books = Book.all
     @book = Book.new
-    # いいね順に並べるための追記
+ # いいね順に並べるための追記
     to  = Time.current.at_end_of_day
     from  = (to - 6.day).at_beginning_of_day
-    @books = Book.includes(:favorited_users).sort {|a,b| b.favorited_users.size <=> a.favorited_users.size}
+    
+ #booksとfavoritesコントローラーはネスト関係にあるからinclides使えた
+    @books = Book.includes(:favorited_users).sort {|a,b|  
+    b.favorited_users.where(created_at: from...to).size <=> 
+    a.favorited_users.where(created_at: from...to).size
+    }
+    
+ #回答は、
+    # to  = Time.current.at_end_of_day
+    # from  = (to - 6.day).at_beginning_of_day
+    # @books = Book.all.sort {|a,b| 
+      # b.favorites.where(created_at: from...to).size <=> 
+      # a.favorites.where(created_at: from...to).size
+    # }
+# ここまで
     
      #観覧数カウント 
      @count_books = Book.order(impressions_count: 'DESC') # ソート機能を追加

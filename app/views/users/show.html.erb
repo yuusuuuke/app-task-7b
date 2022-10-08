@@ -10,7 +10,11 @@
     <div class='col-md-8 offset-md-1'>
       <h2>Books</h2>
       <%= render 'books/index',books: @books %>
-      
+<!--day,weekのbook投稿数数-->
+ <!--部分テンプレート化してるが、今回はbook/showのみの記述なのでテンプレート
+ ページはインスタンス変数使用し、renderは変数の指定なし-->
+      <%= render "users/books_counts"%>
+<!--ここまで-->
     </div>
   </div>
 </div>
